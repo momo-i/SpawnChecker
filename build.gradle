@@ -1,17 +1,16 @@
 buildscript {
   repositories {
-    mavenLocal()
-    maven { url = "https://files.minecraftforge.net/maven" }
-    jcenter()
+    // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
+    maven { url = "https://maven.minecraftforge.net" }
     mavenCentral()
+    mavenLocal()
   }
   dependencies {
-    classpath group: "net.minecraftforge.gradle", name: "ForgeGradle", version: "3.+", changing: true
+    classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
   }
 }
-plugins {
-  id "net.minecrell.licenser" version "0.4"
-}
+
+//apply plugin: "net.minecrell.licenser"
 apply plugin: "net.minecraftforge.gradle"
 apply plugin: "eclipse" // Do not delete it, because referred from FG
 apply from: "./gradle/versions.gradle"
@@ -23,7 +22,7 @@ import static java.time.ZonedDateTime.now
 
 ext {
   modid = "spawnchecker"
-  javaVersion = JavaVersion.VERSION_1_8
+  javaVersion = JavaVersion.VERSION_17
   if (System.getenv("TRAVIS_BUILD_NUMBER") != null) {
     buildNumber = System.getenv("TRAVIS_BUILD_NUMBER")
     snapshot = ""
@@ -31,12 +30,12 @@ ext {
     buildNumber = "local"
     snapshot = "-SNAPSHOT"
   }
-  minecraftVersion = "1.16.4"
-  minecraftVersionRange = "[1.16.4]"
-  forgeVersionRange = "[35,)"
-  forgeVersion = "1.16.4-35.0.1"
-  mappingsChannel = "snapshot"
-  mappingsVersion = "20201028-1.16.3"
+  minecraftVersion = "1.18.1"
+  minecraftVersionRange = "[1.18.1]"
+  forgeVersionRange = "[39,)"
+  forgeVersion = "1.18.1-39.0.9"
+  mappingsChannel = "official"
+  mappingsVersion = "1.18.1"
 }
 
 version = "${versionTag}.${commitCount}${snapshot}"
@@ -49,28 +48,30 @@ tasks.withType(JavaCompile) {
   options.encoding = "UTF-8"
 }
 
+defaultTasks "clean", "build"
+
 repositories {
   mavenLocal()
-  jcenter()
   mavenCentral()
 }
 
 dependencies {
   minecraft "net.minecraftforge:forge:${forgeVersion}"
 
-  implementation "com.google.code.findbugs:jsr305:1.0"
+  implementation 'com.google.code.findbugs:jsr305:3.0.2'
 
-  compileOnly "org.projectlombok:lombok:1.18.+"
+  compileOnly 'org.projectlombok:lombok:1.18.22'
   annotationProcessor "org.projectlombok:lombok:1.18.+"
-  testCompileOnly "org.projectlombok:lombok:1.18.+"
+  testCompileOnly 'org.projectlombok:lombok:1.18.22'
   testAnnotationProcessor "org.projectlombok:lombok:1.18.+"
 
-  testImplementation "org.mockito:mockito-core:2.+"
-  testImplementation "org.apiguardian:apiguardian-api:1.0.0"
-  testImplementation "org.junit.jupiter:junit-jupiter-api:5.+"
-  testImplementation "org.junit.jupiter:junit-jupiter-engine:5.+"
+  testImplementation 'org.mockito:mockito-core:4.2.0'
+  testImplementation 'org.apiguardian:apiguardian-api:1.1.2'
+  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+  testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 }
 
+println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
   // the mappings can be changed at any time, and must be in the following format.
   // snapshot_YYYYMMDD   snapshot are built nightly.
@@ -136,17 +137,17 @@ minecraft {
   }
 }
 
-license {
-  header = project.file("LICENSE-HEADER.txt")
-  ext {
-    name = "alalwww"
-    years = "2019"
-  }
-
-  exclude "**/*.json"
-  exclude "**/*.mcmeta"
-  exclude "**/*.toml"
-}
+//license {
+//  header = project.file("LICENSE-HEADER.txt")
+//  ext {
+//    name = "alalwww"
+//    years = "2021"
+//  }
+//
+//  exclude "**/*.json"
+//  exclude "**/*.mcmeta"
+//  exclude "**/*.toml"
+//}
 
 task processModsTomlResources(type: Copy) {
   into(sourceSets.main.output.resourcesDir)
