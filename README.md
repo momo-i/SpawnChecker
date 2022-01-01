@@ -1,4 +1,4 @@
-SpawnChecker 3 [![Build Status](https://travis-ci.com/alalwww/SpawnChecker.svg?branch=master)](https://travis-ci.com/alalwww/SpawnChecker)
+SpawnChecker 3 [![Build Status](https://travis-ci.com/momo-i/SpawnChecker.svg?branch=master)](https://travis-ci.com/alalwww/SpawnChecker)
 ==================
 ![SpawnChecker logo](src/main/resources/spawnchecker_logo.png)
 
