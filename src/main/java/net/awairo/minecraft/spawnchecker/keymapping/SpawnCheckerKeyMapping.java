@@ -32,15 +32,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import lombok.extern.log4j.Log4j2;
+import org.jetbrains.annotations.NotNull;
 
 @Log4j2
-public final class SpawnCheckerKeyMapping extends KeyMapping {
+public final class SpawnCheckerKeyMapping extends KeyMapping implements SpawnCheckerKeyMappingImpl {
 
     private static final String CATEGORY = "spawnchecker.key.categoryName";
     private static final String KEY_BINDING_DESCRIPTION_PREFIX = "spawnchecker.key.";
 
     private final KeyMappingState state;
-    private KeyMapping keyMapping;
 
     private final int ordinal;
     private final AtomicInteger pressCount = new AtomicInteger(0);
@@ -69,20 +69,21 @@ public final class SpawnCheckerKeyMapping extends KeyMapping {
     }
 
     @Override
-    public int compareTo(final KeyMapping other) {
+    public int compareTo(final @NotNull KeyMapping other) {
         if (other instanceof SpawnCheckerKeyMapping) {
             return Integer.compare(ordinal, ((SpawnCheckerKeyMapping) other).ordinal);
         }
         return super.compareTo(other);
     }
 
-    //@Override
+    @Override
     public boolean isPressed() {
         return pressCount.getAndUpdate(prev -> Math.max(0, prev - 1)) > 0;
     }
 
     void update(long nowMilliTime) {
-        if (keyMapping.isDown()) {
+        boolean down = isDown();
+        if (down) {
             if (isBeforePressed()) {
                 pressTime = nowMilliTime - pressStartMillis;
                 if (isRepeated(nowMilliTime)) {

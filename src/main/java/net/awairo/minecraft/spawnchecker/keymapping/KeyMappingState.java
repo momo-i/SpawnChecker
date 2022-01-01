@@ -23,7 +23,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import net.minecraftforge.client.settings.KeyModifier;
-//import org.lwjgl.glfw.GLFW;
+import org.lwjgl.glfw.GLFW;
 import com.mojang.blaze3d.platform.InputConstants;
 
 import net.minecraft.client.KeyMapping;
@@ -71,8 +71,8 @@ public final class KeyMappingState {
         prevMode = new SpawnCheckerKeyMapping.Builder(this)
             .descriptionSuffix("prevMode")
             .keyModifier(KeyModifier.CONTROL)
-            //.keyCode(GLFW.GLFW_KEY_UP)
-            .keyCode(InputConstants.KEY_UP)
+            .keyCode(GLFW.GLFW_KEY_UP)
+            //.keyCode(InputConstants.KEY_UP)
             .ordinal(0)
             .build();
             //.bindings.add(prevMode);
@@ -80,8 +80,8 @@ public final class KeyMappingState {
         nextMode = new SpawnCheckerKeyMapping.Builder(this)
             .descriptionSuffix("nextMode")
             .keyModifier(KeyModifier.CONTROL)
-            //.keyCode(GLFW.GLFW_KEY_DOWN)
-            .keyCode(InputConstants.KEY_DOWN)
+            .keyCode(GLFW.GLFW_KEY_DOWN)
+            //.keyCode(InputConstants.KEY_DOWN)
             .ordinal(1)
             .build();
         //        bindings.add(nextMode);
@@ -89,8 +89,8 @@ public final class KeyMappingState {
         prevModeOption = new SpawnCheckerKeyMapping.Builder(this)
             .descriptionSuffix("prevModeOption")
             .keyModifier(KeyModifier.NONE)
-            //.keyCode(GLFW.GLFW_KEY_UP)
-            .keyCode(InputConstants.KEY_UP)
+            .keyCode(GLFW.GLFW_KEY_UP)
+            //.keyCode(InputConstants.KEY_UP)
             .ordinal(2)
             .build();
         //        bindings.add(prevModeOption);
@@ -98,8 +98,8 @@ public final class KeyMappingState {
         nextModeOption = new SpawnCheckerKeyMapping.Builder(this)
             .descriptionSuffix("nextModeOption")
             .keyModifier(KeyModifier.NONE)
-            //.keyCode(GLFW.GLFW_KEY_DOWN)
-            .keyCode(InputConstants.KEY_DOWN)
+            .keyCode(GLFW.GLFW_KEY_DOWN)
+            //.keyCode(InputConstants.KEY_DOWN)
             .ordinal(3)
             .build();
         //        bindings.add(nextModeOption);
@@ -107,8 +107,8 @@ public final class KeyMappingState {
         horizontalRangePlus = new SpawnCheckerKeyMapping.Builder(this)
             .descriptionSuffix("horizontalRangePlus")
             .keyModifier(KeyModifier.NONE)
-            //.keyCode(GLFW.GLFW_KEY_KP_ADD)
-            .keyCode(334)
+            .keyCode(GLFW.GLFW_KEY_KP_ADD)
+            //.keyCode(334)
             .ordinal(4)
             .build();
         bindings.add(horizontalRangePlus);
@@ -116,8 +116,8 @@ public final class KeyMappingState {
         horizontalRangeMinus = new SpawnCheckerKeyMapping.Builder(this)
             .descriptionSuffix("horizontalRangeMinus")
             .keyModifier(KeyModifier.NONE)
-            //.keyCode(GLFW.GLFW_KEY_KP_SUBTRACT)
-            .keyCode(333)
+            .keyCode(GLFW.GLFW_KEY_KP_SUBTRACT)
+            //.keyCode(333)
             .ordinal(5)
             .build();
         bindings.add(horizontalRangeMinus);
@@ -125,8 +125,8 @@ public final class KeyMappingState {
         verticalRangePlus = new SpawnCheckerKeyMapping.Builder(this)
             .descriptionSuffix("verticalRangePlus")
             .keyModifier(KeyModifier.CONTROL)
-            //.keyCode(GLFW.GLFW_KEY_KP_ADD)
-            .keyCode(334)
+            .keyCode(GLFW.GLFW_KEY_KP_ADD)
+            //.keyCode(334)
             .ordinal(6)
             .build();
         bindings.add(verticalRangePlus);
@@ -134,8 +134,8 @@ public final class KeyMappingState {
         verticalRangeMinus = new SpawnCheckerKeyMapping.Builder(this)
             .descriptionSuffix("verticalRangeMinus")
             .keyModifier(KeyModifier.CONTROL)
-            //.keyCode(GLFW.GLFW_KEY_KP_SUBTRACT)
-            .keyCode(333)
+            .keyCode(GLFW.GLFW_KEY_KP_SUBTRACT)
+            //.keyCode(333)
             .ordinal(7)
             .build();
         bindings.add(verticalRangeMinus);
@@ -143,8 +143,8 @@ public final class KeyMappingState {
         brightnessPlus = new SpawnCheckerKeyMapping.Builder(this)
             .descriptionSuffix("brightnessPlus")
             .keyModifier(KeyModifier.ALT)
-            //.keyCode(GLFW.GLFW_KEY_KP_ADD)
-            .keyCode(334)
+            .keyCode(GLFW.GLFW_KEY_KP_ADD)
+            //.keyCode(334)
             .ordinal(8)
             .build();
         //        bindings.add(brightnessPlus);
@@ -152,8 +152,8 @@ public final class KeyMappingState {
         brightnessMinus = new SpawnCheckerKeyMapping.Builder(this)
             .descriptionSuffix("brightnessMinus")
             .keyModifier(KeyModifier.ALT)
-            //.keyCode(GLFW.GLFW_KEY_KP_SUBTRACT)
-            .keyCode(333)
+            .keyCode(GLFW.GLFW_KEY_KP_SUBTRACT)
+            //.keyCode(333)
             .ordinal(9)
             .build();
         //        bindings.add(brightnessMinus);
