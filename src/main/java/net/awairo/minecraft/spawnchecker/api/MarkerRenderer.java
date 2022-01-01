@@ -19,13 +19,17 @@
 
 package net.awairo.minecraft.spawnchecker.api;
 
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.util.math.vector.Quaternion;
+import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import com.mojang.math.Quaternion;
 
 public interface MarkerRenderer extends Renderer {
-    EntityRendererManager renderManager();
-    WorldRenderer worldRenderer();
+    EntityRenderDispatcher renderDispatcher();
+    LevelRenderer levelRenderer();
+
+    void addVertex(double x, double y, double z, float u, float v);
+
+    void addVertex(double x, double y, double z, float u, float v, Color color);
 
     void push();
     void pop();

@@ -19,14 +19,18 @@
 
 package net.awairo.minecraft.spawnchecker.api;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+//import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
 import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+//import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+//import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+//import net.minecraft.util.text.ITextComponent;
+import net.minecraft.network.chat.Component;
 
 import lombok.Getter;
 import lombok.NonNull;
@@ -52,7 +56,7 @@ public interface HudData {
         protected static final double ICON_SIZE = 16d;
 
         @NonNull
-        private final ITextComponent text;
+        private final Component text;
         @NonNull
         private final ResourceLocation icon;
         @NonNull
@@ -60,14 +64,14 @@ public interface HudData {
         @NonNull
         private final Color baseColor;
 
-        public Simple(ITextComponent text, ResourceLocation icon, ShowDuration showDuration) {
+        public Simple(Component text, ResourceLocation icon, ShowDuration showDuration) {
             this(text, icon, showDuration, BASE_COLOR);
         }
 
         @Override
         public Visibility draw(@NonNull HudRenderer renderer, long elapsedMillis) {
             if (showDuration.isLessThan(elapsedMillis)) {
-                val stack = new MatrixStack();
+                val stack = new PoseStack();
                 val color = baseColor.withAlpha(computeAlpha(elapsedMillis));
                 if (!color.isTransparent()) {
                     setUpGlState();
@@ -103,13 +107,13 @@ public interface HudData {
             RenderSystem.enableTexture();
             RenderSystem.enableBlend();
             RenderSystem.blendFuncSeparate(
-                SourceFactor.SRC_ALPHA.param, DestFactor.ONE_MINUS_SRC_ALPHA.param,
-                SourceFactor.ONE.param, DestFactor.ZERO.param
+                SourceFactor.SRC_ALPHA.value, DestFactor.ONE_MINUS_SRC_ALPHA.value,
+                SourceFactor.ONE.value, DestFactor.ZERO.value
             );
         }
 
         @SuppressWarnings("Duplicates")
-        protected void drawIcon(MatrixStack stack, ResourceLocation icon, HudRenderer renderer, Color color) {
+        protected void drawIcon(PoseStack stack, ResourceLocation icon, HudRenderer renderer, Color color) {
             final double xMin, yMin, xMax, yMax, z;
             final float uMin, uMax, vMin, vMax;
             xMin = yMin = z = 0d;
@@ -117,7 +121,7 @@ public interface HudData {
             uMin = vMin = 0f;
             uMax = vMax = 1f;
             renderer.bindTexture(icon);
-            renderer.beginQuads(DefaultVertexFormats.POSITION_COLOR_TEX);
+            renderer.beginQuads(DefaultVertexFormat.POSITION_COLOR_TEX);
             renderer.addVertex(xMin, yMin, z, uMin, vMin, color);
             renderer.addVertex(xMin, yMax, z, uMin, vMax, color);
             renderer.addVertex(xMax, yMax, z, uMax, vMax, color);
@@ -125,11 +129,11 @@ public interface HudData {
             renderer.draw();
         }
 
-        protected void drawText(MatrixStack stack, ITextComponent text, HudRenderer renderer, Color color) {
+        protected void drawText(PoseStack stack, Component text, HudRenderer renderer, Color color) {
             if (isTransparentText(color))
                 return;
 
-            renderer.fontRenderer().drawStringWithShadow(stack, text.getString(), Simple.TEXT_X, Simple.TEXT_Y, color.toInt());
+            renderer.fontRenderer().drawShadow(stack, text.getString(), Simple.TEXT_X, Simple.TEXT_Y, color.toInt());
         }
 
         // alpha = 3 以下だと不透明で描画されたためスキップした

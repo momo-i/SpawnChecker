@@ -25,9 +25,9 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.MoreObjects;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 
 import lombok.Getter;
 import lombok.NonNull;
@@ -37,22 +37,22 @@ public class PlayerPos {
     public static Optional<PlayerPos> of(@Nullable Minecraft mayBeMCInstance) {
         return Optional.ofNullable(mayBeMCInstance)
             .map(mc -> mc.player)
-            .map(PlayerEntity::getPositionVec)
+            .map(Player::position)
             .map(PlayerPos::new);
     }
 
     @NonNull
-    private final Vector3d underlying;
+    private final Vec3 underlying;
 
     @Getter(lazy = true)
     private final BlockPos blockPos = new BlockPos(underlying.x, underlying.y, underlying.z);
 
-    public Vector3d get() {
+    public Vec3 get() {
         return underlying;
     }
 
     @VisibleForTesting
-    PlayerPos(@NonNull Vector3d playerPos) {
+    PlayerPos(@NonNull Vec3 playerPos) {
         this.underlying = playerPos;
     }
 

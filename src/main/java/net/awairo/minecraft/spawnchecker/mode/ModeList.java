@@ -27,13 +27,8 @@ import java.util.Optional;
 import net.awairo.minecraft.spawnchecker.api.Mode;
 import net.awairo.minecraft.spawnchecker.api.PlayerPos;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import lombok.extern.log4j.Log4j2;
-import lombok.val;
-import lombok.var;
 
 @Log4j2
 @NoArgsConstructor(access = AccessLevel.PACKAGE)

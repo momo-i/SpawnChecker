@@ -20,24 +20,21 @@
 package net.awairo.minecraft.spawnchecker;
 
 import net.minecraftforge.client.event.ClientChatEvent;
-import net.minecraftforge.client.event.RenderWorldLastEvent;
+import net.minecraftforge.client.event.RenderLevelLastEvent;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.TickEvent.Phase;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.client.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.config.ModConfig.Type;
+import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLFingerprintViolationEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import net.minecraft.client.Minecraft;
@@ -47,7 +44,7 @@ import net.awairo.minecraft.spawnchecker.config.SpawnCheckerConfig;
 import net.awairo.minecraft.spawnchecker.mode.SpawnCheckMode;
 
 import lombok.extern.log4j.Log4j2;
-import lombok.val;
+import lombok.*;
 
 @Log4j2
 @Mod(SpawnChecker.MOD_ID)
@@ -60,16 +57,18 @@ public final class SpawnChecker {
     private final SpawnCheckerState state;
 
     public SpawnChecker() {
-        log.info("SpawnChecker initializing.");
+        log.debug("SpawnChecker initializing.");
 
         val minecraft = Minecraft.getInstance();
         this.profiler = new WrappedProfiler(minecraft.getProfiler());
 
+        log.debug("val setting");
         val pair = new ForgeConfigSpec.Builder().configure(SpawnCheckerConfig::new);
         val config = pair.getLeft();
         val configSpec = pair.getRight();
         this.configHolder = new ConfigHolder(config);
 
+        log.debug("SpawnCheckerState");
         this.state = new SpawnCheckerState(minecraft, config);
 
         this.state.modeState()
@@ -93,7 +92,6 @@ public final class SpawnChecker {
         modBus.addListener(this::onFMLClientSetup);
         modBus.addListener(this::onFMLDedicatedServerSetup);
         modBus.addListener(this::onFMLLoadComplete);
-        modBus.addListener(this::onFMLFingerprintViolation);
 
         // Mod config events
         modBus.addListener(this::onModConfigLoading);
@@ -122,7 +120,7 @@ public final class SpawnChecker {
 
     private void onFMLClientSetup(FMLClientSetupEvent event) {
         log.info("[spawnchecker] onFMLClientSetup({})", event);
-        this.state.keyBindingStates().bindings()
+        this.state.KeyMappingStates().bindings()
             .forEach(ClientRegistry::registerKeyBinding);
     }
 
@@ -137,17 +135,11 @@ public final class SpawnChecker {
         log.info("[spawnchecker] onFMLLoadComplete({})", event);
     }
 
-    private void onFMLFingerprintViolation(FMLFingerprintViolationEvent event) {
-        // TODO: 未実装っぽい。
-        log.error("[spawnchecker] onFMLFingerprintViolation({})", event);
-        throw new SpawnCheckerException("FMLFingerprintViolation");
-    }
-
     // endregion
 
     // region [FML] Mod config events
 
-    private void onModConfigLoading(ModConfig.Loading event) {
+    private void onModConfigLoading(ModConfigEvent.Loading event) {
         log.info("SpawnChecker config loading.");
         configHolder.loadConfig(event.getConfig());
         log.info("SpawnChecker config loaded.");
@@ -198,10 +190,10 @@ public final class SpawnChecker {
         }
     }
 
-    private void onRenderWorldLast(RenderWorldLastEvent event) {
+    private void onRenderWorldLast(RenderLevelLastEvent event) {
         if (state.started()) {
             profiler.startRenderMarker();
-            state.modeState().renderMarkers(event.getContext(), event.getPartialTicks(), event.getMatrixStack());
+            state.modeState().renderMarkers(event.getLevelRenderer(), event.getPartialTick(), event.getPoseStack());
             profiler.endRenderMarker();
         }
     }

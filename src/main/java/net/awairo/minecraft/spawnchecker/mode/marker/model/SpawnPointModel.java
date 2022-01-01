@@ -23,10 +23,10 @@ import com.google.common.base.MoreObjects;
 import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
 import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
 import com.mojang.blaze3d.systems.RenderSystem;
-import org.lwjgl.opengl.GL11;
 
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.ResourceLocation;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormat.Mode;
+import net.minecraft.resources.ResourceLocation;
 
 import net.awairo.minecraft.spawnchecker.api.MarkerRenderer;
 import net.awairo.minecraft.spawnchecker.mode.YOffset;
@@ -72,14 +72,14 @@ public class SpawnPointModel implements MarkerModel {
     public void draw(MarkerRenderer renderer) {
         RenderSystem.enableBlend();
         RenderSystem.blendFuncSeparate(
-            SourceFactor.SRC_ALPHA.param, DestFactor.ONE_MINUS_SRC_ALPHA.param,
-            SourceFactor.ONE.param, DestFactor.ZERO.param
+            SourceFactor.SRC_ALPHA.value, DestFactor.ONE_MINUS_SRC_ALPHA.value,
+            SourceFactor.ONE.value, DestFactor.ZERO.value
         );
         RenderSystem.enableTexture();
 
         renderer.bindTexture(texture);
 
-        renderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+        renderer.begin(Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
 
         float minU = 0.0f;
         float maxU = 0.5f;

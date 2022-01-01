@@ -230,3 +230,4 @@ task signJar {
 assemble.dependsOn "signJar"
 
 logger.quiet("---------------------------------\n mod id: {}\nversion: {}\n commit: {}\n  build: {}\n---------------------------------", modid, version, commitHash, buildNumber)
+defaultTasks "clean", "build"

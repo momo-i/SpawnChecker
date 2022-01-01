@@ -24,7 +24,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import net.awairo.minecraft.spawnchecker.api.ScanRange;
 import net.awairo.minecraft.spawnchecker.api.ScanRange.Vertical;
 
-import lombok.val;
+import lombok.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -31,8 +31,7 @@ import net.awairo.minecraft.spawnchecker.api.ScanRange.Vertical;
 import net.awairo.minecraft.spawnchecker.mode.SpawnCheckMode;
 import net.awairo.minecraft.spawnchecker.mode.UpdateTimer.Interval;
 
-import lombok.NonNull;
-import lombok.var;
+import lombok.*;
 
 import static net.awairo.minecraft.spawnchecker.config.SpawnCheckerConfig.*;
 

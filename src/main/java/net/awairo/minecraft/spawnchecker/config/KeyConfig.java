@@ -22,11 +22,10 @@ package net.awairo.minecraft.spawnchecker.config;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 
-import net.awairo.minecraft.spawnchecker.keybinding.RepeatDelay;
-import net.awairo.minecraft.spawnchecker.keybinding.RepeatRate;
+import net.awairo.minecraft.spawnchecker.keymapping.RepeatDelay;
+import net.awairo.minecraft.spawnchecker.keymapping.RepeatRate;
 
-import lombok.NonNull;
-import lombok.var;
+import lombok.*;
 
 import static net.awairo.minecraft.spawnchecker.config.SpawnCheckerConfig.*;
 

@@ -22,9 +22,9 @@ package net.awairo.minecraft.spawnchecker.mode.marker.model;
 import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
 import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
 import com.mojang.blaze3d.systems.RenderSystem;
-import org.lwjgl.opengl.GL11;
 
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormat.Mode;
 
 import net.awairo.minecraft.spawnchecker.api.MarkerRenderer;
 import net.awairo.minecraft.spawnchecker.mode.marker.MarkerModel;
@@ -35,10 +35,10 @@ public class GuidelineModel implements MarkerModel {
     public void draw(MarkerRenderer renderer) {
         RenderSystem.enableBlend();
         RenderSystem.blendFuncSeparate(
-            SourceFactor.SRC_ALPHA.param, DestFactor.ONE_MINUS_SRC_ALPHA.param,
-            SourceFactor.ONE.param, DestFactor.ZERO.param
+            SourceFactor.SRC_ALPHA.value, DestFactor.ONE_MINUS_SRC_ALPHA.value,
+            SourceFactor.ONE.value, DestFactor.ZERO.value
         );
-        renderer.begin(GL11.GL_LINES, DefaultVertexFormats.POSITION);
+        renderer.begin(Mode.LINES, DefaultVertexFormat.POSITION);
 
         renderer.addVertex(0.5d, 0d, 0.5d);
         renderer.addVertex(0.5d, 32d, 0.5d);

@@ -21,10 +21,7 @@ package net.awairo.minecraft.spawnchecker.mode;
 
 import net.awairo.minecraft.spawnchecker.config.SpawnCheckerConfig;
 
-import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
-import lombok.Value;
-import lombok.val;
+import lombok.*;
 
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 public final class UpdateTimer {

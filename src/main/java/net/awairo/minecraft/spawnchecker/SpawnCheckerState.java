@@ -25,25 +25,23 @@ import java.util.concurrent.ConcurrentSkipListSet;
 import javax.annotation.Nullable;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.util.Util;
-import net.minecraft.world.IWorld;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.Util;
+import net.minecraft.world.level.LevelAccessor;
 
 import net.awairo.minecraft.spawnchecker.config.SpawnCheckerConfig;
 import net.awairo.minecraft.spawnchecker.hud.HudRendererImpl;
-import net.awairo.minecraft.spawnchecker.keybinding.KeyBindingState;
+import net.awairo.minecraft.spawnchecker.keymapping.KeyMappingState;
 import net.awairo.minecraft.spawnchecker.mode.ModeState;
 
-import lombok.AccessLevel;
-import lombok.Getter;
+import lombok.*;
 import lombok.extern.log4j.Log4j2;
-import lombok.val;
 
 @Log4j2
 final class SpawnCheckerState {
 
-    private final Set<IWorld> loadedWorldClient = new ConcurrentSkipListSet<>(Comparator.comparing(Object::toString));
+    private final Set<LevelAccessor> loadedWorldClient = new ConcurrentSkipListSet<>(Comparator.comparing(Object::toString));
 
     private final Minecraft minecraft;
 
@@ -51,7 +49,7 @@ final class SpawnCheckerState {
     private final SpawnCheckerConfig config;
 
     @Getter
-    private final KeyBindingState keyBindingStates;
+    private final KeyMappingState KeyMappingStates;
     @Getter
     private final ModeState modeState;
 
@@ -63,14 +61,14 @@ final class SpawnCheckerState {
     private int tickCount = 0;
 
     @Nullable
-    private ClientPlayerEntity player = null;
+    private LocalPlayer player = null;
 
     SpawnCheckerState(Minecraft minecraft, SpawnCheckerConfig config) {
         this.minecraft = minecraft;
         this.config = config;
         hudRenderer = new HudRendererImpl(minecraft, config);
         modeState = new ModeState(minecraft, config, hudRenderer::setData);
-        keyBindingStates = new KeyBindingState(modeState, config);
+        KeyMappingStates = new KeyMappingState(modeState, config);
         commands = new SpawnCheckerCommands(config);
     }
 
@@ -78,16 +76,16 @@ final class SpawnCheckerState {
         modeState.initialize();
     }
 
-    void loadWorld(IWorld world) {
-        if (world instanceof ClientWorld) {
+    void loadWorld(LevelAccessor world) {
+        if (world instanceof ClientLevel) {
             loadedWorldClient.add(world);
-            modeState.loadWorldClient((ClientWorld) world);
+            modeState.loadWorldClient((ClientLevel) world);
         }
     }
 
-    void unloadWorld(IWorld world) {
-        if (world instanceof ClientWorld) {
-            modeState.unloadWorldClient((ClientWorld) world);
+    void unloadWorld(LevelAccessor world) {
+        if (world instanceof ClientLevel) {
+            modeState.unloadWorldClient((ClientLevel) world);
             loadedWorldClient.remove(world);
         }
     }
@@ -101,9 +99,9 @@ final class SpawnCheckerState {
     }
 
     void onTickEnd() {
-        val nowMilliTime = Util.milliTime();
+        val nowMilliTime = Util.getMillis();
         tickCount++;
-        keyBindingStates.onTick(nowMilliTime);
+        KeyMappingStates.onTick(nowMilliTime);
         modeState.onTick(tickCount, nowMilliTime);
     }
 

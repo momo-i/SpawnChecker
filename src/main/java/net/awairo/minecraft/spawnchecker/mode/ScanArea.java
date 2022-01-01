@@ -26,8 +26,8 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.CubeCoordinateIterator;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Cursor3D;
 
 import net.awairo.minecraft.spawnchecker.api.PlayerPos;
 import net.awairo.minecraft.spawnchecker.api.ScanRange;
@@ -52,7 +52,7 @@ final class ScanArea {
         val maxZ = playerPos.blockPos().getZ() + hRange.value();
         val minZ = playerPos.blockPos().getZ() - hRange.value();
         val estSize = (hRange.value() * 2 + 1) ^ 2;
-        val posIter = new BlockPosIterator(new CubeCoordinateIterator(minX, y, minZ, maxX, y, maxZ));
+        val posIter = new BlockPosIterator(new Cursor3D(minX, y, minZ, maxX, y, maxZ));
 
         return StreamSupport
             .stream(Spliterators.spliterator(posIter, estSize, CHARACTERISTICS), PARALLEL)
@@ -61,16 +61,16 @@ final class ScanArea {
 
     @RequiredArgsConstructor
     private static final class BlockPosIterator implements Iterator<BlockPos> {
-        private final CubeCoordinateIterator coords;
+        private final Cursor3D coords;
 
         @Override
         public boolean hasNext() {
-            return coords.hasNext();
+            return coords.advance();
         }
 
         @Override
         public BlockPos next() {
-            return new BlockPos(coords.getX(), coords.getY(), coords.getZ());
+            return new BlockPos(coords.nextX(), coords.nextY(), coords.nextZ());
         }
     }
 
