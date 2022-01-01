@@ -19,17 +19,13 @@
 
 package net.awairo.minecraft.spawnchecker.api;
 
-//import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
 import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
 import com.mojang.blaze3d.systems.RenderSystem;
 
-//import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-//import net.minecraft.util.ResourceLocation;
 import net.minecraft.resources.ResourceLocation;
-//import net.minecraft.util.text.ITextComponent;
 import net.minecraft.network.chat.Component;
 
 import lombok.Getter;

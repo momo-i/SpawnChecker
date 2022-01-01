@@ -44,58 +44,34 @@ public enum Brightness {
     }
 
     public Brightness next() {
-        switch (this) {
-            case MINUS_5:
-                return MINUS_4;
-            case MINUS_4:
-                return MINUS_3;
-            case MINUS_3:
-                return MINUS_2;
-            case MINUS_2:
-                return MINUS_1;
-            case MINUS_1:
-                return ZERO;
-            case ZERO:
-                return PLUS_1;
-            case PLUS_1:
-                return PLUS_2;
-            case PLUS_2:
-                return PLUS_3;
-            case PLUS_3:
-                return PLUS_4;
-            case PLUS_4:
-            case PLUS_5:
-                return PLUS_5;
-            default:
-                throw new InternalError("Unreachable code");
-        }
+        return switch (this) {
+            case MINUS_5 -> MINUS_4;
+            case MINUS_4 -> MINUS_3;
+            case MINUS_3 -> MINUS_2;
+            case MINUS_2 -> MINUS_1;
+            case MINUS_1 -> ZERO;
+            case ZERO -> PLUS_1;
+            case PLUS_1 -> PLUS_2;
+            case PLUS_2 -> PLUS_3;
+            case PLUS_3 -> PLUS_4;
+            case PLUS_4, PLUS_5 -> PLUS_5;
+            default -> throw new InternalError("Unreachable code");
+        };
     }
 
     public Brightness prev() {
-        switch (this) {
-            case MINUS_5:
-            case MINUS_4:
-                return MINUS_5;
-            case MINUS_3:
-                return MINUS_4;
-            case MINUS_2:
-                return MINUS_3;
-            case MINUS_1:
-                return MINUS_2;
-            case ZERO:
-                return MINUS_1;
-            case PLUS_1:
-                return ZERO;
-            case PLUS_2:
-                return PLUS_1;
-            case PLUS_3:
-                return PLUS_2;
-            case PLUS_4:
-                return PLUS_3;
-            case PLUS_5:
-                return PLUS_4;
-            default:
-                throw new InternalError("Unreachable code");
-        }
+        return switch (this) {
+            case MINUS_5, MINUS_4 -> MINUS_5;
+            case MINUS_3 -> MINUS_4;
+            case MINUS_2 -> MINUS_3;
+            case MINUS_1 -> MINUS_2;
+            case ZERO -> MINUS_1;
+            case PLUS_1 -> ZERO;
+            case PLUS_2 -> PLUS_1;
+            case PLUS_3 -> PLUS_2;
+            case PLUS_4 -> PLUS_3;
+            case PLUS_5 -> PLUS_4;
+            default -> throw new InternalError("Unreachable code");
+        };
     }
 }
