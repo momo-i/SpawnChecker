@@ -3,7 +3,7 @@ ant.condition(property: "os", value: "unix") { os(family: "unix") }
 
 def out = new ByteArrayOutputStream()
 exec {
-  def releaseTagPattern = "v*.*"
+  def releaseTagPattern = "v3.0"
   def describeCmd = ["git", "describe", "--match", releaseTagPattern]
   switch (ant.properties.os) {
     case "windows":
