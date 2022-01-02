@@ -20,12 +20,13 @@
 package net.awairo.minecraft.spawnchecker.keymapping;
 
 import net.minecraftforge.client.settings.IKeyConflictContext;
+import net.minecraftforge.client.settings.KeyConflictContext;
 
 public enum SpawnCheckerKeyConflictContext implements IKeyConflictContext {
     INSTANCE {
         @Override
         public boolean isActive() {
-            return !net.minecraftforge.client.settings.KeyConflictContext.GUI.isActive();
+            return !KeyConflictContext.GUI.isActive();
         }
 
         @Override

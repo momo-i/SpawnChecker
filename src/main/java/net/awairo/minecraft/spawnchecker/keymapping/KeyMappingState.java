@@ -74,7 +74,7 @@ public final class KeyMappingState {
             .keyCode(GLFW.GLFW_KEY_UP)
             .ordinal(0)
             .build();
-            //.bindings.add(prevMode);
+            //bindings.add(prevMode);
 
         nextMode = new SpawnCheckerKeyMapping.Builder(this)
             .descriptionSuffix("nextMode")
@@ -106,7 +106,8 @@ public final class KeyMappingState {
             .keyCode(GLFW.GLFW_KEY_KP_ADD)
             .ordinal(4)
             .build();
-        bindings.add(horizontalRangePlus);
+        // @TODO ハングアップするの何とかする
+        //bindings.add(horizontalRangePlus);
 
         horizontalRangeMinus = new SpawnCheckerKeyMapping.Builder(this)
             .descriptionSuffix("horizontalRangeMinus")
@@ -114,7 +115,8 @@ public final class KeyMappingState {
             .keyCode(GLFW.GLFW_KEY_KP_SUBTRACT)
             .ordinal(5)
             .build();
-        bindings.add(horizontalRangeMinus);
+        // @TODO ハングアップするの何とかする
+        //bindings.add(horizontalRangeMinus);
 
         verticalRangePlus = new SpawnCheckerKeyMapping.Builder(this)
             .descriptionSuffix("verticalRangePlus")
@@ -122,7 +124,8 @@ public final class KeyMappingState {
             .keyCode(GLFW.GLFW_KEY_KP_ADD)
             .ordinal(6)
             .build();
-        bindings.add(verticalRangePlus);
+        // @TODO ハングアップするの何とかする
+        //bindings.add(verticalRangePlus);
 
         verticalRangeMinus = new SpawnCheckerKeyMapping.Builder(this)
             .descriptionSuffix("verticalRangeMinus")
@@ -130,7 +133,8 @@ public final class KeyMappingState {
             .keyCode(GLFW.GLFW_KEY_KP_SUBTRACT)
             .ordinal(7)
             .build();
-        bindings.add(verticalRangeMinus);
+        // @TODO ハングアップするの何とかする
+        //bindings.add(verticalRangeMinus);
 
         brightnessPlus = new SpawnCheckerKeyMapping.Builder(this)
             .descriptionSuffix("brightnessPlus")
