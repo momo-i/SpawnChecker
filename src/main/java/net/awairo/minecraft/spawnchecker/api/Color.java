@@ -27,7 +27,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import lombok.NonNull;
-import lombok.val;
 
 public class Color {
     private final int intRed;
@@ -168,9 +167,9 @@ public class Color {
     }
 
     public static Color of(int red, int green, int blue, int alpha) {
-        val hash = intToHashCode(red, green, blue, alpha);
+        int hash = intToHashCode(red, green, blue, alpha);
         return INT_TO_COLOR.computeIfAbsent(hash, k -> {
-            val color = new Color(red, green, blue, alpha);
+            Color color = new Color(red, green, blue, alpha);
             STRING_TO_COLOR.putIfAbsent(normalize(color.toStringValue()), color);
             return color;
         });
@@ -178,7 +177,7 @@ public class Color {
 
     public static Color ofColorCode(@NonNull String colorCode) {
         return STRING_TO_COLOR.computeIfAbsent(normalize(colorCode), key -> {
-            val color = parse(key);
+            Color color = parse(key);
             INT_TO_COLOR.putIfAbsent(color.toInt(), color);
             return color;
         });
@@ -207,7 +206,7 @@ public class Color {
         Pattern.compile("^#(?<r>[0-9a-f]{2})(?<g>[0-9a-f]{2})(?<b>[0-9a-f]{2})(?<a>[0-9a-f]{2})$");
 
     private static String normalize(String colorCode) {
-        val code = colorCode.toLowerCase();
+        String code = colorCode.toLowerCase();
         if (!code.startsWith("#") || code.length() - 1 != code.chars().skip(1).filter(LOWER_HEX_CHARS::contains).count())
             throw new IllegalArgumentException(String.format("Illegal color format. colorCode='%s'", colorCode));
 
@@ -251,7 +250,7 @@ public class Color {
 
         RuntimeException cause = null;
         try {
-            val matcher = RRGGBBAA_PATTERN.matcher(normalizedCode);
+            Matcher matcher = RRGGBBAA_PATTERN.matcher(normalizedCode);
             if (matcher.matches()) {
                 int r = Integer.parseInt(matcher.group("r"), RADIX_HEX);
                 int g = Integer.parseInt(matcher.group("g"), RADIX_HEX);

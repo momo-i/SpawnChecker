@@ -72,7 +72,6 @@ public final class KeyMappingState {
             .descriptionSuffix("prevMode")
             .keyModifier(KeyModifier.CONTROL)
             .keyCode(GLFW.GLFW_KEY_UP)
-            //.keyCode(InputConstants.KEY_UP)
             .ordinal(0)
             .build();
             //.bindings.add(prevMode);
@@ -81,7 +80,6 @@ public final class KeyMappingState {
             .descriptionSuffix("nextMode")
             .keyModifier(KeyModifier.CONTROL)
             .keyCode(GLFW.GLFW_KEY_DOWN)
-            //.keyCode(InputConstants.KEY_DOWN)
             .ordinal(1)
             .build();
         //        bindings.add(nextMode);
@@ -90,7 +88,6 @@ public final class KeyMappingState {
             .descriptionSuffix("prevModeOption")
             .keyModifier(KeyModifier.NONE)
             .keyCode(GLFW.GLFW_KEY_UP)
-            //.keyCode(InputConstants.KEY_UP)
             .ordinal(2)
             .build();
         //        bindings.add(prevModeOption);
@@ -99,7 +96,6 @@ public final class KeyMappingState {
             .descriptionSuffix("nextModeOption")
             .keyModifier(KeyModifier.NONE)
             .keyCode(GLFW.GLFW_KEY_DOWN)
-            //.keyCode(InputConstants.KEY_DOWN)
             .ordinal(3)
             .build();
         //        bindings.add(nextModeOption);
@@ -108,7 +104,6 @@ public final class KeyMappingState {
             .descriptionSuffix("horizontalRangePlus")
             .keyModifier(KeyModifier.NONE)
             .keyCode(GLFW.GLFW_KEY_KP_ADD)
-            //.keyCode(334)
             .ordinal(4)
             .build();
         bindings.add(horizontalRangePlus);
@@ -117,7 +112,6 @@ public final class KeyMappingState {
             .descriptionSuffix("horizontalRangeMinus")
             .keyModifier(KeyModifier.NONE)
             .keyCode(GLFW.GLFW_KEY_KP_SUBTRACT)
-            //.keyCode(333)
             .ordinal(5)
             .build();
         bindings.add(horizontalRangeMinus);
@@ -126,7 +120,6 @@ public final class KeyMappingState {
             .descriptionSuffix("verticalRangePlus")
             .keyModifier(KeyModifier.CONTROL)
             .keyCode(GLFW.GLFW_KEY_KP_ADD)
-            //.keyCode(334)
             .ordinal(6)
             .build();
         bindings.add(verticalRangePlus);
@@ -135,7 +128,6 @@ public final class KeyMappingState {
             .descriptionSuffix("verticalRangeMinus")
             .keyModifier(KeyModifier.CONTROL)
             .keyCode(GLFW.GLFW_KEY_KP_SUBTRACT)
-            //.keyCode(333)
             .ordinal(7)
             .build();
         bindings.add(verticalRangeMinus);
@@ -144,7 +136,6 @@ public final class KeyMappingState {
             .descriptionSuffix("brightnessPlus")
             .keyModifier(KeyModifier.ALT)
             .keyCode(GLFW.GLFW_KEY_KP_ADD)
-            //.keyCode(334)
             .ordinal(8)
             .build();
         //        bindings.add(brightnessPlus);
@@ -153,7 +144,6 @@ public final class KeyMappingState {
             .descriptionSuffix("brightnessMinus")
             .keyModifier(KeyModifier.ALT)
             .keyCode(GLFW.GLFW_KEY_KP_SUBTRACT)
-            //.keyCode(333)
             .ordinal(9)
             .build();
         //        bindings.add(brightnessMinus);

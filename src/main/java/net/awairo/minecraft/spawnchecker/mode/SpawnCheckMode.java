@@ -23,6 +23,7 @@ import java.util.LinkedList;
 import java.util.Objects;
 import java.util.stream.Stream;
 
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -99,7 +100,8 @@ public class SpawnCheckMode extends SelectableMode {
             if (!posIterator.hasNext())
                 return Stream.empty();
 
-            val lightLevelThreshold = 7;
+            // 1.18から明るさレベル0以下でスポーンするので0にしてみる
+            val lightLevelThreshold = 0;
             BlockPos underLoc = null;
             BlockPos loc;
             BlockState underBlock = null, locBlock;
@@ -141,12 +143,11 @@ public class SpawnCheckMode extends SelectableMode {
                 // region 現在の座標はなにもない空気ブロックであることの判定
                 // WorldEntitySpawner#func_234968_a_[isValidEmptySpawnBlock](IBlockReader, BlockPos, BlockState, FluidState, EntityType) と同様の判定
 
-                // @TODO 直す
-                /*if (locBlock.isOpaqueCube(world, loc) || locBlock.canProvidePower() || locBlock.is(BlockTags.RAILS)) {
+                if (locBlock.isSolidRender(world, loc) || locBlock.isSignalSource() || locBlock.is(BlockTags.RAILS)) {
                     underLoc = loc;
                     underBlock = locBlock;
                     continue;
-                }*/
+                }
 
                 locFluid = world.getFluidState(loc);
                 if (!locFluid.isEmpty()) {
@@ -156,9 +157,8 @@ public class SpawnCheckMode extends SelectableMode {
                 }
                 // endregion
 
-                // region 明るさ判定
+                // region 明るさ判定 完全に0になったらスポーンさせる(1.18からの仕様)
                 // net.minecraft.entity.monster.MonsterEntity#isValidLightLevel()
-                //if (world.getLightFor(LightLayer.BLOCK, loc) > lightLevelThreshold) {
                 if (world.getBrightness(LightLayer.BLOCK, loc) > lightLevelThreshold) {
                     underLoc = loc;
                     underBlock = locBlock;

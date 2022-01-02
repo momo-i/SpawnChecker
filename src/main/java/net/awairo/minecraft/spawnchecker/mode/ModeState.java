@@ -243,7 +243,7 @@ public class ModeState {
 
     @Value
     @RequiredArgsConstructor
-    private final class ModeStateSnapshot implements Mode.State {
+    private class ModeStateSnapshot implements Mode.State {
         ModeStateSnapshot() {
             this(
                 ModeState.this.worldClient,
@@ -256,12 +256,12 @@ public class ModeState {
             );
         }
 
-        private final ClientLevel levelClient;
-        private final int tickCount;
-        private final Horizontal horizontalRange;
-        private final Vertical verticalRange;
-        private final Brightness brightness;
-        private final ShowDuration hudShowDuration;
-        private final Consumer<HudData> hudDataRegistry;
+        ClientLevel levelClient;
+        int tickCount;
+        Horizontal horizontalRange;
+        Vertical verticalRange;
+        Brightness brightness;
+        ShowDuration hudShowDuration;
+        Consumer<HudData> hudDataRegistry;
     }
 }

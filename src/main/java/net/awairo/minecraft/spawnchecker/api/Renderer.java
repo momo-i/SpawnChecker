@@ -40,25 +40,25 @@ public interface Renderer {
     //    begin(GL11.GL_POINT, format);
     //}
 
-    //default void beginLines(VertexFormat format) {
-    //    begin(GL11.GL_LINES, format);
-    //}
+    default void beginLines(VertexFormat format) {
+        begin(Mode.LINES, format);
+    }
 
     //default void beginLineLoop(VertexFormat format) {
     //    begin(GL11.GL_LINE_LOOP, format);
     //}
 
-    //default void beginTriangles(VertexFormat format) {
-    //    begin(GL11.GL_TRIANGLES, format);
-    //}
+    default void beginTriangles(VertexFormat format) {
+        begin(Mode.TRIANGLES, format);
+    }
 
-    //default void beginTriangleStrip(VertexFormat format) {
-    //    begin(GL11.GL_TRIANGLE_STRIP, format);
-    //}
+    default void beginTriangleStrip(VertexFormat format) {
+        begin(Mode.TRIANGLE_STRIP, format);
+    }
 
-    //default void beginTriangleFan(VertexFormat format) {
-    //    begin(GL11.GL_TRIANGLE_FAN, format);
-    //}
+    default void beginTriangleFan(VertexFormat format) {
+        begin(Mode.TRIANGLE_FAN, format);
+    }
 
     default void beginQuads(VertexFormat format) {
         begin(Mode.QUADS, format);

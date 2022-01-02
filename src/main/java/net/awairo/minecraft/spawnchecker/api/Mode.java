@@ -133,11 +133,11 @@ public interface Mode {
     }
 
     @Value
-    final class Priority implements Comparable<Priority> {
+    class Priority implements Comparable<Priority> {
         public static final int MIN = 0;
         public static final Priority DEFAULT = new Priority(0);
 
-        private final int value;
+        int value;
 
         public Priority(int value) {
             if (value < MIN)

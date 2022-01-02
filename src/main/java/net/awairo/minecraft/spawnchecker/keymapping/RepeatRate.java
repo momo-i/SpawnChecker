@@ -31,7 +31,7 @@ public class RepeatRate {
         return milliSeconds == DEFAULT.milliSeconds ? DEFAULT : new RepeatRate(milliSeconds);
     }
 
-    private final int milliSeconds;
+    int milliSeconds;
 
     private RepeatRate(int milliSeconds) {
         if (milliSeconds < MIN || milliSeconds > MAX)

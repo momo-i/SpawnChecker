@@ -37,13 +37,13 @@ import lombok.Value;
 import lombok.val;
 
 @Value
-final class ScanArea {
+public class ScanArea {
     private static int CHARACTERISTICS = Spliterator.DISTINCT | Spliterator.IMMUTABLE | Spliterator.NONNULL;
     private static boolean PARALLEL = true;
 
-    private final PlayerPos playerPos;
-    private final ScanRange.Horizontal hRange;
-    private final ScanRange.Vertical vRange;
+    PlayerPos playerPos;
+    ScanRange.Horizontal hRange;
+    ScanRange.Vertical vRange;
 
     Stream<XZ> xzStream() {
         val minX = playerPos.blockPos().getX() - hRange.value();
@@ -75,9 +75,9 @@ final class ScanArea {
     }
 
     @Value
-    final class XZ {
+    class XZ {
         // Area内のいずれかのx,z座標でPlayerと同じy座標のpos
-        final BlockPos playerYPos;
+        BlockPos playerYPos;
 
         IntStream yStream() {
             return IntStream.range(playerYPos.getY() - vRange.value(), playerYPos.getY() + vRange.value() + 1);

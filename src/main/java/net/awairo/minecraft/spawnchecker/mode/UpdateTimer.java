@@ -38,7 +38,7 @@ public final class UpdateTimer {
     }
 
     @Value
-    public static final class Interval {
+    public static class Interval {
         public static final int MIN_VALUE = 50;
         public static final int MAX_VALUE = 5_000;
         public static final Interval DEFAULT = new Interval(500);
@@ -47,7 +47,7 @@ public final class UpdateTimer {
             return milliSeconds == DEFAULT.milliSeconds ? DEFAULT : new Interval(milliSeconds);
         }
 
-        private final int milliSeconds;
+        int milliSeconds;
 
         private Interval(int milliSeconds) {
             if (milliSeconds < MIN_VALUE || milliSeconds > MAX_VALUE)

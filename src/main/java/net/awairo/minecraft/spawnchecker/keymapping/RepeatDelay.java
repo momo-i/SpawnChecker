@@ -31,7 +31,7 @@ public class RepeatDelay {
         return DEFAULT.milliSeconds == milliSeconds ? DEFAULT : new RepeatDelay(milliSeconds);
     }
 
-    private final int milliSeconds;
+    int milliSeconds;
 
     private RepeatDelay(int milliSeconds) {
         if (milliSeconds < MIN || milliSeconds > MAX)

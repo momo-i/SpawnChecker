@@ -147,7 +147,7 @@ public interface HudData {
 
     @SuppressWarnings("WeakerAccess")
     @Value
-    final class ShowDuration {
+    class ShowDuration {
         public static final long MIN_VALUE = 0L;
         public static final long MAX_VALUE = 10_000L;
         public static final ShowDuration DEFAULT = new ShowDuration(5000L);
@@ -159,7 +159,7 @@ public interface HudData {
             this.milliSeconds = milliSeconds;
         }
 
-        private final long milliSeconds;
+        long milliSeconds;
 
         public boolean isLessThan(long elapsedMillis) {
             return elapsedMillis < milliSeconds;

@@ -122,12 +122,12 @@ public final class HudRendererImpl implements HudRenderer {
         PoseStack modelviewPose = RenderSystem.getModelViewStack();
         this.tickCount = tickCount;
         this.partialTicks = partialTicks;
-        val now = Util.getMillis();
+        long now = Util.getMillis();
         if (showStartTime == UNDEFINED) {
             showStartTime = now;
         }
-        val h = minecraft.getWindow().getGuiScaledHeight();
-        val w = minecraft.getWindow().getGuiScaledWidth();
+        float h = minecraft.getWindow().getGuiScaledHeight();
+        float w = minecraft.getWindow().getGuiScaledWidth();
         modelviewPose.pushPose();
         modelviewPose.translate(
             w / 20 + config.hudConfig().xOffset().value(),

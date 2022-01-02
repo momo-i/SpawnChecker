@@ -63,7 +63,6 @@ public final class SpawnChecker {
         val minecraft = Minecraft.getInstance();
         this.profiler = new WrappedProfiler(minecraft.getProfiler());
 
-        log.debug("val setting");
         val pair = new ForgeConfigSpec.Builder().configure(SpawnCheckerConfig::new);
         val config = pair.getLeft();
         val configSpec = pair.getRight();

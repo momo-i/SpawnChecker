@@ -35,13 +35,13 @@ import lombok.Getter;
 import lombok.Value;
 
 @Value
-final class MyMarkerRendererImpl implements MarkerRenderer {
-    private final LevelRenderer worldRenderer;
-    private final float partialTicks;
+public class MyMarkerRendererImpl implements MarkerRenderer {
+    LevelRenderer worldRenderer;
+    float partialTicks;
     @Getter(AccessLevel.PRIVATE)
-    private final PoseStack matrixStack;
-    private final TextureManager textureManager;
-    private final EntityRenderDispatcher renderManager;
+    PoseStack matrixStack;
+    TextureManager textureManager;
+    EntityRenderDispatcher renderManager;
 
     @Override
     public void bindTexture(ResourceLocation texture) {

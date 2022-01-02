@@ -41,7 +41,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
-import lombok.val;
 
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class SpawnPointMarker implements Marker {
@@ -102,7 +101,7 @@ public class SpawnPointMarker implements Marker {
         Color color,
         BlockPos pos,
         YOffset yOffset,
-               boolean drawGuideline
+        boolean drawGuideline
     ) {
         this.markerModel = new SpawnPointModel(texture.location, blockSize, 0.03d, yOffset);
         this.guidelineModel = drawGuideline ? new GuidelineModel() : null;
@@ -115,10 +114,7 @@ public class SpawnPointMarker implements Marker {
         Minecraft mc = Minecraft.getInstance();
         Camera info = mc.gameRenderer.getMainCamera();
         Vec3 view = info.getPosition();
-        //if (view == null)
-        //    return;
 
-        //val viewerPos = view;
         renderer.push();
         {
             color.setToColor4F(RenderSystem::setShaderColor);
