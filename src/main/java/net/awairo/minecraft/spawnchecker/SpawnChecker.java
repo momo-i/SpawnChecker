@@ -19,6 +19,7 @@
 
 package net.awairo.minecraft.spawnchecker;
 
+import net.awairo.minecraft.spawnchecker.mode.ModeState;
 import net.minecraftforge.client.event.ClientChatEvent;
 import net.minecraftforge.client.event.RenderLevelLastEvent;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -67,9 +68,10 @@ public final class SpawnChecker {
         val config = pair.getLeft();
         val configSpec = pair.getRight();
         this.configHolder = new ConfigHolder(config);
-
+        
         log.debug("SpawnCheckerState");
-        this.state = new SpawnCheckerState(minecraft, config);
+        ModeState modeState = null;
+        this.state = new SpawnCheckerState(minecraft, config, modeState);
 
         this.state.modeState()
             .add(new SpawnCheckMode(config.presetModeConfig()));

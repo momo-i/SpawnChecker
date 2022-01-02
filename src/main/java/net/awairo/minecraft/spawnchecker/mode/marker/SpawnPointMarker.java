@@ -21,9 +21,11 @@ package net.awairo.minecraft.spawnchecker.mode.marker;
 
 import javax.annotation.Nullable;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.BlockPos;
+import net.minecraft.client.Camera;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.phys.Vec3;
 
 import net.awairo.minecraft.spawnchecker.SpawnChecker;
 import net.awairo.minecraft.spawnchecker.api.Color;
@@ -110,17 +112,20 @@ public class SpawnPointMarker implements Marker {
 
     @Override
     public void draw(MarkerRenderer renderer) {
-        if (renderer.renderDispatcher().camera == null)
-            return;
+        Minecraft mc = Minecraft.getInstance();
+        Camera info = mc.gameRenderer.getMainCamera();
+        Vec3 view = info.getPosition();
+        //if (view == null)
+        //    return;
 
-        val viewerPos = renderer.renderDispatcher().camera.getPosition();
+        //val viewerPos = view;
         renderer.push();
         {
             color.setToColor4F(RenderSystem::setShaderColor);
             renderer.translate(
-                ((double) pos.getX()) - viewerPos.x,
-                ((double) pos.getY()) - viewerPos.y - 1d, // 1ブロック下げる
-                ((double) pos.getZ()) - viewerPos.z
+                ((double) pos.getX()) - view.x,
+                ((double) pos.getY()) - view.y - 1d, // 1ブロック下げる
+                ((double) pos.getZ()) - view.z
             );
             markerModel.draw(renderer);
 
@@ -134,9 +139,9 @@ public class SpawnPointMarker implements Marker {
         {
             color.setToColor4F(RenderSystem::setShaderColor);
             renderer.translate(
-                ((double) pos.getX()) - viewerPos.x,
-                ((double) pos.getY()) - viewerPos.y,
-                ((double) pos.getZ()) - viewerPos.z
+                ((double) pos.getX()) - view.x,
+                ((double) pos.getY()) - view.y,
+                ((double) pos.getZ()) - view.z
             );
             guidelineModel.draw(renderer);
         }

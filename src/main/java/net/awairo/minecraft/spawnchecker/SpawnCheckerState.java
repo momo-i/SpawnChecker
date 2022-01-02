@@ -63,11 +63,14 @@ final class SpawnCheckerState {
     @Nullable
     private LocalPlayer player = null;
 
-    SpawnCheckerState(Minecraft minecraft, SpawnCheckerConfig config) {
+    SpawnCheckerState(Minecraft minecraft, SpawnCheckerConfig config, ModeState state) {
+        ModeState modeState1;
         this.minecraft = minecraft;
         this.config = config;
-        hudRenderer = new HudRendererImpl(minecraft, config);
-        modeState = new ModeState(minecraft, config, hudRenderer::setData);
+        modeState1 = state;
+        hudRenderer = new HudRendererImpl(minecraft, config, modeState1);
+        modeState1 = new ModeState(minecraft, config, hudRenderer::setData);
+        this.modeState = modeState1;
         KeyMappingStates = new KeyMappingState(modeState, config);
         commands = new SpawnCheckerCommands(config);
     }

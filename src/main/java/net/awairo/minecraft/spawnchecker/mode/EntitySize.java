@@ -40,12 +40,16 @@ enum EntitySize {
 
     private final float width;
     private final float height;
+    double posX;
+    double posY;
+    double posZ;
 
     // EntityLiving#isNotColliding(IWorldReaderBase)
     boolean isNotColliding(ClientLevel worldIn, BlockPos pos) {
         val bb = boundingBox(pos);
         return !worldIn.containsAnyLiquid(bb)
-            && worldIn.noCollision(null, bb);
+            && worldIn.noCollision(null, bb)
+            && worldIn.isUnobstructed(null, Shapes.create(bb));
             //&& worldIn.noCollision(null, Shapes.create(bb));
     }
 
@@ -56,13 +60,16 @@ enum EntitySize {
     }
 
     AABB boundingBox(BlockPos pos) {
+        posX = pos.getX();
+        posY = pos.getY();
+        posZ = pos.getZ();
         return new AABB(
-            (double) pos.getX(),
-            (double) pos.getY(),
-            (double) pos.getZ(),
-            (double) pos.getX() + width,
-            (double) pos.getY() + height,
-            (double) pos.getZ() + width
+            posX,
+            posY,
+            posZ,
+            posX + width,
+            posY + height,
+            posZ + width
         );
     }
 }

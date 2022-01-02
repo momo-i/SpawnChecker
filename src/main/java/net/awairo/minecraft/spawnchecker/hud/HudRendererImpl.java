@@ -34,6 +34,7 @@ import net.awairo.minecraft.spawnchecker.api.HudData;
 import net.awairo.minecraft.spawnchecker.api.HudData.Visibility;
 import net.awairo.minecraft.spawnchecker.api.HudRenderer;
 import net.awairo.minecraft.spawnchecker.config.SpawnCheckerConfig;
+import net.awairo.minecraft.spawnchecker.mode.ModeState;
 
 import lombok.extern.log4j.Log4j2;
 import lombok.*;
@@ -44,6 +45,7 @@ import lombok.*;
 public final class HudRendererImpl implements HudRenderer {
     private final Minecraft minecraft;
     private final SpawnCheckerConfig config;
+    private final ModeState state;
 
     private static final long UNDEFINED = -1;
     @Nullable

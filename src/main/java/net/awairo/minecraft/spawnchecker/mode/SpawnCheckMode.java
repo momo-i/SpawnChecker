@@ -20,6 +20,7 @@
 package net.awairo.minecraft.spawnchecker.mode;
 
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 import net.minecraft.world.level.block.state.BlockState;
@@ -28,7 +29,6 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.world.entity.SpawnPlacements.Type;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.material.Material;
@@ -42,6 +42,8 @@ import net.awairo.minecraft.spawnchecker.mode.marker.SpawnPointMarker;
 
 import lombok.extern.log4j.Log4j2;
 import lombok.*;
+
+import javax.annotation.Nullable;
 
 @Log4j2
 public class SpawnCheckMode extends SelectableMode {
@@ -73,9 +75,9 @@ public class SpawnCheckMode extends SelectableMode {
 
         // TODO: ネザー、エンド対応
         //if (world.getDimension().isSurfaceWorld()) {
-        //if (world.func_239132_a_() instanceof net.minecraft.client.renderer.DimensionSpecialEffects.OverworldEffects) {
-        //    return updateInSurfaceWorld(world, area);
-        //}
+        if (world.effects() instanceof net.minecraft.client.renderer.DimensionSpecialEffects.OverworldEffects) {
+            return updateInSurfaceWorld(world, area);
+        }
 
         return Stream.empty();
     }
@@ -102,7 +104,6 @@ public class SpawnCheckMode extends SelectableMode {
             BlockPos loc;
             BlockState underBlock = null, locBlock;
             FluidState locFluid;
-            Material mat = null;
 
             boolean underIsSpawnableBlock = false;
 
@@ -113,10 +114,11 @@ public class SpawnCheckMode extends SelectableMode {
             while (posIterator.hasNext()) {
                 loc = posIterator.next();
                 locBlock = world.getBlockState(loc);
-
+                Material destMat = locBlock.getMaterial();
+                boolean matSolid = destMat.isSolid();
                 // region 足元のブロックがスポーン可能であることの判定
                 // 上面が平らならスポーンできるブロック
-                if (mat.isSolid()) {
+                if (matSolid) {
                     // 岩盤とバリアブロックにはスポーンできない
                     underIsSpawnableBlock =
                         locBlock.getBlock() != Blocks.BEDROCK && locBlock.getBlock() != Blocks.BARRIER;
