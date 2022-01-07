@@ -25,7 +25,7 @@ import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.resources.ResourceLocation;
-import com.mojang.math.Quaternion;
+//import com.mojang.math.Quaternion;
 
 import net.awairo.minecraft.spawnchecker.api.Color;
 import net.awairo.minecraft.spawnchecker.api.MarkerRenderer;
@@ -53,16 +53,6 @@ public class MyMarkerRendererImpl implements MarkerRenderer {
         buffer()
             .vertex(matrixStack.last().pose(), (float) x, (float) y, (float) z)
             .endVertex();
-    }
-
-    @Override
-    public EntityRenderDispatcher renderDispatcher() {
-        return null;
-    }
-
-    @Override
-    public LevelRenderer levelRenderer() {
-        return null;
     }
 
     @Override
@@ -104,7 +94,7 @@ public class MyMarkerRendererImpl implements MarkerRenderer {
     public void translate(double x, double y, double z) {
         matrixStack.translate(x, y, z);
     }
-
+/*
     @Override
     public void scale(float m00, float m11, float m22) {
         matrixStack.scale(m00, m11, m22);
@@ -119,4 +109,6 @@ public class MyMarkerRendererImpl implements MarkerRenderer {
     public void clear() {
         matrixStack.clear();
     }
+
+ */
 }

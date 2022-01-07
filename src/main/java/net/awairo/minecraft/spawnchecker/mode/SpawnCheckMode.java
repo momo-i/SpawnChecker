@@ -20,9 +20,10 @@
 package net.awairo.minecraft.spawnchecker.mode;
 
 import java.util.LinkedList;
-import java.util.Objects;
 import java.util.stream.Stream;
 
+import net.minecraft.client.renderer.DimensionSpecialEffects;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
@@ -43,8 +44,6 @@ import net.awairo.minecraft.spawnchecker.mode.marker.SpawnPointMarker;
 
 import lombok.extern.log4j.Log4j2;
 import lombok.*;
-
-import javax.annotation.Nullable;
 
 @Log4j2
 public class SpawnCheckMode extends SelectableMode {
@@ -76,7 +75,7 @@ public class SpawnCheckMode extends SelectableMode {
 
         // TODO: ネザー、エンド対応
         //if (world.getDimension().isSurfaceWorld()) {
-        if (world.effects() instanceof net.minecraft.client.renderer.DimensionSpecialEffects.OverworldEffects) {
+        if (world.effects() instanceof DimensionSpecialEffects.OverworldEffects) {
             return updateInSurfaceWorld(world, area);
         }
 

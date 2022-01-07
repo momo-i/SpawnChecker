@@ -82,8 +82,8 @@ public final class SpawnCheckerKeyMapping extends KeyMapping implements SpawnChe
     }
 
     void update(long nowMilliTime) {
-        boolean down = isDown();
-        if (down) {
+
+        if (isPressed()) {
             if (isBeforePressed()) {
                 pressTime = nowMilliTime - pressStartMillis;
                 if (isRepeated(nowMilliTime)) {
@@ -101,7 +101,7 @@ public final class SpawnCheckerKeyMapping extends KeyMapping implements SpawnChe
         }
 
         // noinspection StatementWithEmptyBody
-        while (super.isDown()) {
+        while (super.isUnbound()) {
             // consume underlying pressTime
         }
     }

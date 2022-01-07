@@ -24,6 +24,7 @@ import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat.Mode;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.renderer.RenderBuffers;
 
 public interface Renderer {
     void bindTexture(ResourceLocation texture);
