@@ -100,7 +100,6 @@ class ColorTest {
         assertEquals(153, c.intAlpha());
         assertEquals("#99999999", c.toStringValue());
 
-        // Alpha が最大値の場合は文字列値には出力されない
         c = Color.ofColorCode("#ffff");
         assertEquals(255, c.intRed());
         assertEquals(255, c.intGreen());
@@ -248,7 +247,6 @@ class ColorTest {
 
     }
 
-    // 一度intにしてから再度floatにする
     private static float round(float in) {
         return ((int) (in * 255f) / 255f);
     }

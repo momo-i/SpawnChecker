@@ -113,15 +113,15 @@ public class SpawnPointMarker implements Marker {
     public void draw(MarkerRenderer renderer) {
         Minecraft mc = Minecraft.getInstance();
         Camera info = mc.gameRenderer.getMainCamera();
-        Vec3 view = info.getPosition();
+        Vec3 viewerPos = info.getPosition();
 
         renderer.push();
         {
             color.setToColor4F(RenderSystem::setShaderColor);
             renderer.translate(
-                ((double) pos.getX()) - view.x,
-                ((double) pos.getY()) - view.y - 1d, // 1ブロック下げる
-                ((double) pos.getZ()) - view.z
+                ((double) pos.getX()) - viewerPos.x,
+                ((double) pos.getY()) - viewerPos.y - 1d, // 1ブロック下げる
+                ((double) pos.getZ()) - viewerPos.z
             );
             markerModel.draw(renderer);
 
@@ -135,9 +135,9 @@ public class SpawnPointMarker implements Marker {
         {
             color.setToColor4F(RenderSystem::setShaderColor);
             renderer.translate(
-                ((double) pos.getX()) - view.x,
-                ((double) pos.getY()) - view.y,
-                ((double) pos.getZ()) - view.z
+                ((double) pos.getX()) - viewerPos.x,
+                ((double) pos.getY()) - viewerPos.y,
+                ((double) pos.getZ()) - viewerPos.z
             );
             guidelineModel.draw(renderer);
         }

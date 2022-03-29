@@ -21,6 +21,7 @@ package net.awairo.minecraft.spawnchecker.keymapping;
 
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
+
 import net.minecraftforge.client.settings.KeyModifier;
 
 import net.minecraft.client.KeyMapping;
@@ -41,7 +42,6 @@ public final class SpawnCheckerKeyMapping extends KeyMapping implements SpawnChe
     private static final String KEY_BINDING_DESCRIPTION_PREFIX = "spawnchecker.key.";
 
     private final KeyMappingState state;
-
     private final int ordinal;
     private final AtomicInteger pressCount = new AtomicInteger(0);
 

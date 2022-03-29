@@ -36,6 +36,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.multiplayer.ClientSuggestionProvider;
 import net.minecraft.commands.SharedSuggestionProvider;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.Util;
@@ -118,7 +119,7 @@ final class SpawnCheckerCommands {
     }
 
     @RequiredArgsConstructor
-    private static final class Source implements SharedSuggestionProvider {
+    static final class Source implements SharedSuggestionProvider {
         private final ClientSuggestionProvider underlying;
 
         void sendFeedback(Component message) {
@@ -158,6 +159,16 @@ final class SpawnCheckerCommands {
         }
 
         @Override
+        public void suggestRegistryElements(Registry<?> p_212336_, ElementSuggestionType p_212337_, SuggestionsBuilder p_212338_) {
+            SharedSuggestionProvider.super.suggestRegistryElements(p_212336_, p_212337_, p_212338_);
+        }
+
+        @Override
+        public CompletableFuture<Suggestions> suggestRegistryElements(ResourceKey<? extends Registry<?>> p_212339_, ElementSuggestionType p_212340_, SuggestionsBuilder p_212341_, CommandContext<?> p_212342_) {
+            return null;
+        }
+
+        @Override
         @Nonnull
         public Collection<String> getAllTeams() {
             return underlying.getAllTeams();
@@ -175,11 +186,10 @@ final class SpawnCheckerCommands {
             return underlying.getRecipeNames();
         }
 
-        @Override
         @Nonnull
         public CompletableFuture<Suggestions> customSuggestion(
-            @Nonnull CommandContext<SharedSuggestionProvider> context, @Nonnull SuggestionsBuilder suggestionsBuilder) {
-            return underlying.customSuggestion(context, suggestionsBuilder);
+            @Nonnull CommandContext<?> context) {
+            return underlying.customSuggestion(context);
         }
 
         @Override

@@ -19,9 +19,9 @@
 
 package net.awairo.minecraft.spawnchecker.api;
 
-//import net.minecraft.client.renderer.LevelRenderer;
-//import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
-//import com.mojang.math.Quaternion;
+import net.minecraft.client.renderer.LevelRenderer;
+import com.mojang.math.Quaternion;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 
 public interface MarkerRenderer extends Renderer {
     //EntityRenderDispatcher renderDispatcher();

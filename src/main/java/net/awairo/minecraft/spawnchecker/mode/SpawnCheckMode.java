@@ -23,13 +23,16 @@ import java.util.LinkedList;
 import java.util.stream.Stream;
 
 import net.minecraft.client.renderer.DimensionSpecialEffects;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.world.entity.SpawnPlacements.Type;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.dimension.DimensionType;
+import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LightLayer;
@@ -75,7 +78,27 @@ public class SpawnCheckMode extends SelectableMode {
 
         // TODO: ネザー、エンド対応
         //if (world.getDimension().isSurfaceWorld()) {
-        if (world.effects() instanceof DimensionSpecialEffects.OverworldEffects) {
+        /*if (world.effects() instanceof DimensionSpecialEffects.OverworldEffects) {
+            log.debug("OverWorld");
+            return updateInSurfaceWorld(world, area);
+        } else if (world.effects() instanceof DimensionSpecialEffects.NetherEffects) {
+            log.debug("Nether");
+            return updateInSurfaceWorld(world, area);
+        } else if (world.effects() instanceof DimensionSpecialEffects.EndEffects) {
+            log.debug("End");
+            return updateInSurfaceWorld(world, area);
+        }*/
+        ResourceKey OVERWORLD = LevelStem.OVERWORLD;
+        ResourceKey NETHER = LevelStem.NETHER;
+        ResourceKey END = LevelStem.END;
+        if (OVERWORLD == world.dimension()) {
+            log.debug("OVERWORLD");
+            return updateInSurfaceWorld(world, area);
+        } else if (NETHER == world.dimension()) {
+            log.debug("NETHER");
+            return updateInSurfaceWorld(world, area);
+        } else if (END == world.dimension()) {
+            log.debug("END");
             return updateInSurfaceWorld(world, area);
         }
 

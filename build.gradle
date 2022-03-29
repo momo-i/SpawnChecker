@@ -22,7 +22,6 @@ import static java.time.ZonedDateTime.now
 
 ext {
   modid = "spawnchecker"
-  javaVersion = JavaVersion.VERSION_17
   if (System.getenv("TRAVIS_BUILD_NUMBER") != null) {
     buildNumber = System.getenv("TRAVIS_BUILD_NUMBER")
     snapshot = ""
@@ -30,23 +29,17 @@ ext {
     buildNumber = "local"
     snapshot = "-SNAPSHOT"
   }
-  minecraftVersion = "1.18.1"
-  minecraftVersionRange = "[1.18.1]"
-  forgeVersionRange = "[39,)"
-  forgeVersion = "1.18.1-39.0.9"
+  minecraftVersion = "1.18.2"
+  minecraftVersionRange = "[1.18.2]"
+  forgeVersionRange = "[40,)"
+  forgeVersion = "1.18.2-40.0.24"
   mappingsChannel = "official"
-  mappingsVersion = "1.18.1"
+  mappingsVersion = "1.18.2"
 }
 
 version = "${versionTag}.${commitCount}${snapshot}"
 group = "net.awairo.minecraft.spawnchecker"
 archivesBaseName = "spawnchecker-${minecraftVersion}"
-
-sourceCompatibility = targetCompatibility = javaVersion
-tasks.withType(JavaCompile) {
-  sourceCompatibility = targetCompatibility = javaVersion
-  options.encoding = "UTF-8"
-}
 
 defaultTasks "clean", "build"
 

@@ -20,6 +20,8 @@
 package net.awairo.minecraft.spawnchecker;
 
 import net.awairo.minecraft.spawnchecker.mode.ModeState;
+import net.awairo.minecraft.spawnchecker.mode.SlimeCheckMode;
+import net.awairo.minecraft.spawnchecker.mode.SpawnerVisualizerMode;
 import net.minecraftforge.client.event.ClientChatEvent;
 import net.minecraftforge.client.event.RenderLevelLastEvent;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -44,6 +46,8 @@ import net.awairo.minecraft.spawnchecker.config.ConfigHolder;
 import net.awairo.minecraft.spawnchecker.config.SpawnCheckerConfig;
 import net.awairo.minecraft.spawnchecker.mode.SpawnCheckMode;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import lombok.extern.log4j.Log4j2;
 import lombok.*;
 
@@ -52,13 +56,14 @@ import lombok.*;
 public final class SpawnChecker {
 
     public static final String MOD_ID = "spawnchecker";
+    public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
     private final WrappedProfiler profiler;
     private final ConfigHolder configHolder;
     private final SpawnCheckerState state;
 
     public SpawnChecker() {
-        log.debug("SpawnChecker initializing.");
+        LOGGER.debug("SpawnChecker initializing.");
 
         val minecraft = Minecraft.getInstance();
         this.profiler = new WrappedProfiler(minecraft.getProfiler());
@@ -68,12 +73,12 @@ public final class SpawnChecker {
         val configSpec = pair.getRight();
         this.configHolder = new ConfigHolder(config);
         
-        log.debug("SpawnCheckerState");
+        LOGGER.debug("SpawnCheckerState");
         ModeState modeState = null;
         this.state = new SpawnCheckerState(minecraft, config, modeState);
 
         this.state.modeState()
-            .add(new SpawnCheckMode(config.presetModeConfig()));
+                .add(new SpawnCheckMode(config.presetModeConfig()));
         // FIXME: not implemented X(
         //            .add(new SlimeCheckMode())
         //            .add(new SpawnerVisualizerMode());
@@ -110,7 +115,7 @@ public final class SpawnChecker {
         forgeBus.addListener(this::onRenderWorldLast);
         // endregion
 
-        log.info("SpawnChecker initialized.");
+        LOGGER.info("SpawnChecker initialized.");
     }
 
     // region [FML] Mod lifecycle events
@@ -120,20 +125,20 @@ public final class SpawnChecker {
     }
 
     private void onFMLClientSetup(FMLClientSetupEvent event) {
-        log.info("[spawnchecker] onFMLClientSetup({})", event);
+        LOGGER.info("[spawnchecker] onFMLClientSetup({})", event);
         this.state.KeyMappingStates().bindings()
             .forEach(ClientRegistry::registerKeyBinding);
     }
 
     private void onFMLDedicatedServerSetup(@SuppressWarnings("unused") FMLDedicatedServerSetupEvent event) {
         // not supported server mod
-        log.warn("SpawnChecker is unsupported the Minecraft server.");
+        LOGGER.warn("SpawnChecker is unsupported the Minecraft server.");
         throw new SpawnCheckerException("SpawnChecker is unsupported the Minecraft server.");
     }
 
     private void onFMLLoadComplete(FMLLoadCompleteEvent event) {
         state.initialize();
-        log.info("[spawnchecker] onFMLLoadComplete({})", event);
+        LOGGER.info("[spawnchecker] onFMLLoadComplete({})", event);
     }
 
     // endregion

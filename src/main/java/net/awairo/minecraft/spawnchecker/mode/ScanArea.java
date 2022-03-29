@@ -32,9 +32,7 @@ import net.minecraft.core.Cursor3D;
 import net.awairo.minecraft.spawnchecker.api.PlayerPos;
 import net.awairo.minecraft.spawnchecker.api.ScanRange;
 
-import lombok.RequiredArgsConstructor;
-import lombok.Value;
-import lombok.val;
+import lombok.*;
 
 @Value
 public class ScanArea {

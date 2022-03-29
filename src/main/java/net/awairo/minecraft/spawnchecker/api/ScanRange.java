@@ -58,7 +58,7 @@ public abstract class ScanRange<T extends ScanRange<T>> implements Comparable<T>
 
     @Override
     public boolean equals(Object obj) {
-        return obj == this || getClass().isInstance(obj) && ((ScanRange) obj).value == value;
+        return obj == this || getClass().isInstance(obj) && ((ScanRange<?>) obj).value == value;
     }
 
     @Override
