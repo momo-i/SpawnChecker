@@ -24,11 +24,10 @@ import java.util.function.Consumer;
 import java.util.stream.Stream;
 import javax.annotation.Nonnull;
 
-//import net.minecraft.client.world.ClientWorld;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.ComponentContents;
+import net.minecraft.network.chat.contents.TranslatableContents;
 
 import lombok.NonNull;
 import lombok.Value;
@@ -96,9 +95,9 @@ public interface Mode {
 
     final class Name implements Comparable<Name> {
 
-        private final TranslatableComponent textComponent;
+        private final TranslatableContents textComponent;
 
-        public Component textComponent() {
+        public ComponentContents textComponent() {
             return textComponent;
         }
 
@@ -107,7 +106,7 @@ public interface Mode {
         }
 
         public Name(@NonNull String translationKey) {
-            this.textComponent = new TranslatableComponent(translationKey);
+            this.textComponent = new TranslatableContents(translationKey);
         }
 
         @Override

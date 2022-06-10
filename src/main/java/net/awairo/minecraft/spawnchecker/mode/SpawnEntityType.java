@@ -22,5 +22,6 @@ package net.awairo.minecraft.spawnchecker.mode;
 public enum SpawnEntityType {
     DEFAULT,
     ENDERMAN,
-    SPIDER
+    SPIDER,
+    WARDEN
 }

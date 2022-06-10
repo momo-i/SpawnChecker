@@ -29,12 +29,12 @@ ext {
     buildNumber = "local"
     snapshot = "-SNAPSHOT"
   }
-  minecraftVersion = "1.18.2"
-  minecraftVersionRange = "[1.18.2]"
-  forgeVersionRange = "[40,)"
-  forgeVersion = "1.18.2-40.0.24"
+  minecraftVersion = "1.19"
+  minecraftVersionRange = "[1.19]"
+  forgeVersionRange = "[41,)"
+  forgeVersion = "1.19-41.0.16"
   mappingsChannel = "official"
-  mappingsVersion = "1.18.2"
+  mappingsVersion = "1.19"
 }
 
 version = "${versionTag}.${commitCount}${snapshot}"
@@ -53,12 +53,12 @@ dependencies {
 
   implementation 'com.google.code.findbugs:jsr305:3.0.2'
 
-  compileOnly 'org.projectlombok:lombok:1.18.22'
-  annotationProcessor "org.projectlombok:lombok:1.18.+"
-  testCompileOnly 'org.projectlombok:lombok:1.18.22'
+  compileOnly 'org.projectlombok:lombok:1.18.24'
+  annotationProcessor 'org.projectlombok:lombok:1.18.24'
+  testCompileOnly 'org.projectlombok:lombok:1.18.24'
   testAnnotationProcessor "org.projectlombok:lombok:1.18.+"
 
-  testImplementation 'org.mockito:mockito-core:4.2.0'
+  testImplementation 'org.mockito:mockito-core:4.5.1'
   testImplementation 'org.apiguardian:apiguardian-api:1.1.2'
   testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
   testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.2'

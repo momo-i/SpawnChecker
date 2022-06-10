@@ -41,8 +41,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.Util;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.ComponentContents;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.level.Level;
 
 import net.awairo.minecraft.spawnchecker.config.SpawnCheckerConfig;
@@ -58,15 +58,15 @@ final class SpawnCheckerCommands {
 
     private final SpawnCheckerConfig config;
 
-    private static final Component TO_ENABLE =
-        new TranslatableComponent("spawnchecker.command.message.toEnabled");
-    private static final Component TO_DISABLE =
-        new TranslatableComponent("spawnchecker.command.message.toDisabled");
+    private static final ComponentContents TO_ENABLE =
+        new TranslatableContents("spawnchecker.command.message.toEnabled");
+    private static final ComponentContents TO_DISABLE =
+        new TranslatableContents("spawnchecker.command.message.toDisabled");
 
-    private static final Component GUIDELINE_ON =
-        new TranslatableComponent("spawnchecker.command.message.guidelineOn");
-    private static final Component GUIDELINE_OFF =
-        new TranslatableComponent("spawnchecker.command.message.guidelineOff");
+    private static final ComponentContents GUIDELINE_ON =
+        new TranslatableContents("spawnchecker.command.message.guidelineOn");
+    private static final ComponentContents GUIDELINE_OFF =
+        new TranslatableContents("spawnchecker.command.message.guidelineOff");
 
     private final CommandDispatcher<Source> dispatcher = new CommandDispatcher<>();
 
@@ -107,7 +107,7 @@ final class SpawnCheckerCommands {
             ;
     }
 
-    private int success(CommandContext<Source> ctx, Runnable runnable, Component message) {
+    private int success(CommandContext<Source> ctx, Runnable runnable, ComponentContents message) {
         log.debug("do executes: {}, {}", ctx, message);
         runnable.run();
         ctx.getSource().sendFeedback(message);
@@ -122,9 +122,9 @@ final class SpawnCheckerCommands {
     static final class Source implements SharedSuggestionProvider {
         private final ClientSuggestionProvider underlying;
 
-        void sendFeedback(Component message) {
+        void sendFeedback(ComponentContents message) {
             if (Minecraft.getInstance().player != null) {
-                Minecraft.getInstance().player.sendMessage(message, Util.NIL_UUID);
+                //Minecraft.getInstance().player.sendMessage(message, Util.NIL_UUID);
             }
         }
 

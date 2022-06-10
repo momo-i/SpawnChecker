@@ -25,8 +25,8 @@ import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import net.minecraft.network.chat.ComponentContents;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.network.chat.Component;
 
 import lombok.Getter;
 import lombok.NonNull;
@@ -52,7 +52,7 @@ public interface HudData {
         protected static final double ICON_SIZE = 16d;
 
         @NonNull
-        private final Component text;
+        private final ComponentContents text;
         @NonNull
         private final ResourceLocation icon;
         @NonNull
@@ -60,7 +60,7 @@ public interface HudData {
         @NonNull
         private final Color baseColor;
 
-        public Simple(Component text, ResourceLocation icon, ShowDuration showDuration) {
+        public Simple(ComponentContents text, ResourceLocation icon, ShowDuration showDuration) {
             this(text, icon, showDuration, BASE_COLOR);
         }
 
@@ -125,11 +125,11 @@ public interface HudData {
             renderer.draw();
         }
 
-        protected void drawText(PoseStack stack, Component text, HudRenderer renderer, Color color) {
+        protected void drawText(PoseStack stack, ComponentContents text, HudRenderer renderer, Color color) {
             if (isTransparentText(color))
                 return;
 
-            renderer.fontRenderer().drawShadow(stack, text.getString(), Simple.TEXT_X, Simple.TEXT_Y, color.toInt());
+            renderer.fontRenderer().drawShadow(stack, text.toString(), Simple.TEXT_X, Simple.TEXT_Y, color.toInt());
         }
 
         // alpha = 3 以下だと不透明で描画されたためスキップした

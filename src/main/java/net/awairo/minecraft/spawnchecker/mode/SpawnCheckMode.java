@@ -22,16 +22,13 @@ package net.awairo.minecraft.spawnchecker.mode;
 import java.util.LinkedList;
 import java.util.stream.Stream;
 
-import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.world.entity.SpawnPlacements.Type;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.core.BlockPos;

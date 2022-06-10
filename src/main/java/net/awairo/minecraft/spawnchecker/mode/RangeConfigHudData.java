@@ -23,8 +23,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.ComponentContents;
+import net.minecraft.network.chat.contents.TranslatableContents;
 
 import net.awairo.minecraft.spawnchecker.api.Color;
 import net.awairo.minecraft.spawnchecker.api.HudData;
@@ -43,8 +43,8 @@ final class RangeConfigHudData extends HudData.Simple {
 
     private static final float LINE_OFFSET = 7.0f;
 
-    private final Component hRange;
-    private final Component vRange;
+    private final ComponentContents hRange;
+    private final ComponentContents vRange;
 
     private final double iconMinX;
     private final double iconMaxX;
@@ -58,8 +58,8 @@ final class RangeConfigHudData extends HudData.Simple {
         @NonNull ShowDuration showDuration) {
         super(modeName.textComponent(), icon, showDuration);
 
-        this.hRange = new TranslatableComponent(HUD_H_RANGE_KEY, hRange.value());
-        this.vRange = new TranslatableComponent(HUD_V_RANGE_KEY, vRange.value());
+        this.hRange = new TranslatableContents(HUD_H_RANGE_KEY, hRange.value());
+        this.vRange = new TranslatableContents(HUD_V_RANGE_KEY, vRange.value());
 
         this.iconMinX = TEXT_X;
         this.iconMaxX = TEXT_X + ICON_SIZE;
@@ -102,7 +102,7 @@ final class RangeConfigHudData extends HudData.Simple {
     }
 
     @Override
-    protected void drawText(PoseStack stack, Component text, HudRenderer renderer, Color color) {
+    protected void drawText(PoseStack stack, ComponentContents text, HudRenderer renderer, Color color) {
         if (isTransparentText(color))
             return;
 
@@ -111,7 +111,7 @@ final class RangeConfigHudData extends HudData.Simple {
         renderer.fontRenderer()
             .drawShadow(
                 stack,
-                hRange.getString(),
+                hRange.toString(),
                 textX,
                 TEXT_Y + renderer.fontRenderer().lineHeight + LINE_OFFSET,
                 color.toInt()
@@ -120,7 +120,7 @@ final class RangeConfigHudData extends HudData.Simple {
         renderer.fontRenderer()
             .drawShadow(
                 stack,
-                vRange.getString(),
+                vRange.toString(),
                 textX,
                 TEXT_Y + (renderer.fontRenderer().lineHeight + LINE_OFFSET) * 2,
                 color.toInt()
