@@ -35,6 +35,7 @@ enum EntitySize {
     SPIDER(1.4F, 0.9F),
     SLIME(0.51000005F, 0.51000005F), // smallest size
     GHAST(4.0F, 4.0F),
+    WARDEN(2.0F, 5.0F),
 
     ;
 

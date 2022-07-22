@@ -22,15 +22,17 @@ package net.awairo.minecraft.spawnchecker;
 import net.awairo.minecraft.spawnchecker.mode.ModeState;
 import net.awairo.minecraft.spawnchecker.mode.SlimeCheckMode;
 import net.awairo.minecraft.spawnchecker.mode.SpawnerVisualizerMode;
+import net.minecraft.client.Options;
 import net.minecraftforge.client.event.ClientChatEvent;
-import net.minecraftforge.client.event.RenderLevelLastEvent;
+import net.minecraftforge.client.event.RenderLevelStageEvent;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.TickEvent.Phase;
-import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.client.ClientRegistry;
+//import net.minecraftforge.client.ClientRegistry;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig.Type;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
@@ -126,8 +128,8 @@ public final class SpawnChecker {
 
     private void onFMLClientSetup(FMLClientSetupEvent event) {
         LOGGER.info("[spawnchecker] onFMLClientSetup({})", event);
-        this.state.KeyMappingStates().bindings()
-            .forEach(ClientRegistry::registerKeyBinding);
+        //this.state.KeyMappingStates().bindings()
+            //.forEach(ClientRegistry::registerKeyBinding);
     }
 
     private void onFMLDedicatedServerSetup(@SuppressWarnings("unused") FMLDedicatedServerSetupEvent event) {
@@ -165,12 +167,12 @@ public final class SpawnChecker {
         }
     }
 
-    private void onWorldLoad(WorldEvent.Load event) {
-        state.loadWorld(event.getWorld());
+    private void onWorldLoad(LevelEvent.Load event) {
+        state.loadWorld(event.getLevel());
     }
 
-    private void onWorldUnload(WorldEvent.Unload event) {
-        state.unloadWorld(event.getWorld());
+    private void onWorldUnload(LevelEvent.Unload event) {
+        state.unloadWorld(event.getLevel());
     }
 
     // endregion
@@ -196,7 +198,7 @@ public final class SpawnChecker {
         }
     }
 
-    private void onRenderWorldLast(RenderLevelLastEvent event) {
+    private void onRenderWorldLast(RenderLevelStageEvent event) {
         if (state.started()) {
             profiler.startRenderMarker();
             state.modeState().renderMarkers(event.getLevelRenderer(), event.getPartialTick(), event.getPoseStack());

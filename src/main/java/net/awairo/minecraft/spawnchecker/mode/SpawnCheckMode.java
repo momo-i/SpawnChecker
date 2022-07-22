@@ -89,13 +89,13 @@ public class SpawnCheckMode extends SelectableMode {
         ResourceKey NETHER = LevelStem.NETHER;
         ResourceKey END = LevelStem.END;
         if (OVERWORLD == world.dimension()) {
-            log.debug("OVERWORLD");
+            //log.debug("OVERWORLD");
             return updateInSurfaceWorld(world, area);
         } else if (NETHER == world.dimension()) {
-            log.debug("NETHER");
+            //log.debug("NETHER");
             return updateInSurfaceWorld(world, area);
         } else if (END == world.dimension()) {
-            log.debug("END");
+            //log.debug("END");
             return updateInSurfaceWorld(world, area);
         }
 
